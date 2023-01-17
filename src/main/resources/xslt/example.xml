@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<medications>
+    <patientname>Beatriz Correia</patientname>
+    <medication>
+        <PZN>11111</PZN>
+        <medicationname>Medikament A</medicationname>
+        <dosage>1-0-0-0</dosage>
+    </medication>
+
+    <medication>
+        <PZN>22222</PZN>
+        <medicationname>Medikament B</medicationname>
+        <dosage>0-0-0-1</dosage>
+    </medication>
+
+    <medication>
+        <PZN>33333</PZN>
+        <medicationname>Medikament C</medicationname>
+        <dosage>0-1-0-0</dosage>
+    </medication>
+</medications>
