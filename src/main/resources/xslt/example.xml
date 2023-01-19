@@ -1,22 +1,21 @@
 <?xml version="1.0"?>
 
 <medications>
-    <patientname>Beatriz Correia</patientname>
-    <medication>
-        <PZN>11111</PZN>
-        <medicationname>Medikament A</medicationname>
-        <dosage>1-0-0-0</dosage>
-    </medication>
 
-    <medication>
-        <PZN>22222</PZN>
-        <medicationname>Medikament B</medicationname>
-        <dosage>0-0-0-1</dosage>
-    </medication>
+    <practitionerfirstname>Vorname</practitionerfirstname>
+    <practitionerlastname>Name</practitionerlastname>
 
-    <medication>
-        <PZN>33333</PZN>
-        <medicationname>Medikament C</medicationname>
-        <dosage>0-1-0-0</dosage>
-    </medication>
+    <patientfirstname>Vorname</patientfirstname>
+    <patientlastname>Name</patientlastname>
+    <patientaddress>Straße</patientaddress>
+    <patientpostalcode>PLZ</patientpostalcode>
+    <patientcity>Ort</patientcity>
+    <timestamp>2022-08-18T20:45:25.87Z</timestamp>
+    <medicationname>Medikament name</medicationname>
+
+    <pharmacyname>Name Apotheke</pharmacyname>
+    <pharmacyaddress>Straße</pharmacyaddress>
+    <pharmacypostalcode>PLZ</pharmacypostalcode>
+    <pharmacycity>Ort</pharmacycity>
+
 </medications>
