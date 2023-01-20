@@ -1,21 +1,165 @@
-<?xml version="1.0"?>
-
-<medications>
-
-    <practitionerfirstname>Vorname</practitionerfirstname>
-    <practitionerlastname>Name</practitionerlastname>
-
-    <patientfirstname>Vorname</patientfirstname>
-    <patientlastname>Name</patientlastname>
-    <patientaddress>Straße</patientaddress>
-    <patientpostalcode>PLZ</patientpostalcode>
-    <patientcity>Ort</patientcity>
-    <timestamp>2022-08-18T20:45:25.87Z</timestamp>
-    <medicationname>Medikament name</medicationname>
-
-    <pharmacyname>Name Apotheke</pharmacyname>
-    <pharmacyaddress>Straße</pharmacyaddress>
-    <pharmacypostalcode>PLZ</pharmacypostalcode>
-    <pharmacycity>Ort</pharmacycity>
-
-</medications>
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <resourceType>Bundle</resourceType>
+    <id></id>
+    <meta>
+        <lastUpdated></lastUpdated>
+        <profile>https://fhir.kbv.de/StructureDefinition/KBV_PR_ERP_Bundle|1.0.2</profile>
+    </meta>
+    <identifier>
+        <system>https://gematik.de/fhir/NamingSystem/PrescriptionID</system>
+        <value></value>
+    </identifier>
+    <type>document</type>
+    <timestamp>2023-01-19T12:03:20.90Z</timestamp>
+    <entry>
+        <fullUrl></fullUrl>
+        <resource>
+            <resourceType>Practitioner</resourceType>
+            <id>2102</id>
+            <meta>
+                <versionId>7</versionId>
+                <lastUpdated>2023-01-09T14:13:29.195+00:00</lastUpdated>
+                <source>#8c12031bb4056f78</source>
+            </meta>
+            <extension>
+                <url/>
+                <valueString>fax</valueString>
+            </extension>
+            <extension>
+                <url/>
+                <valueString>qZDmwQyz73nhdbD9c8qvfxtbCtwXfYRQeNECYEY73k2hjcABSfXf8YV9EK7BQgNAiUWPvV2vE64g2MirVaZ9YNhweairitqZ9DSFRfU4mbXKDjLVgbnKwnmD</valueString>
+            </extension>
+            <identifier>
+                <system>https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR</system>
+                <value>123456789</value>
+            </identifier>
+            <name>
+                <use>official</use>
+                <family>Zimmermann</family>
+                <given>Claudia</given>
+            </name>
+            <telecom>
+                <system>email</system>
+                <value>beatriz.correia@incentergy.de</value>
+            </telecom>
+            <telecom>
+                <system>phone</system>
+                <value>888888888</value>
+            </telecom>
+            <telecom>
+                <system>fax</system>
+                <value>999999999</value>
+            </telecom>
+            <address>
+                <use>home</use>
+                <line>Gartenstraße 9</line>
+                <city>Berlin</city>
+                <postalCode>10178</postalCode>
+            </address>
+        </resource>
+    </entry>
+    <entry>
+        <fullUrl></fullUrl>
+        <resource>
+            <resourceType>Patient</resourceType>
+            <id>13513</id>
+            <meta>
+                <versionId>1</versionId>
+                <lastUpdated>2022-11-15T02:23:42.842+00:00</lastUpdated>
+                <source>#1c418e3f70ee7ff2</source>
+            </meta>
+            <text>
+                <status>generated</status>
+                <div>&lt;div
+                    xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;div class=&quot;hapiHeaderText&quot;&gt;Heidi &lt;b&gt;MÜLLER &lt;/b&gt;&lt;/div&gt;&lt;table class=&quot;hapiPropertyTable&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Address&lt;/td&gt;&lt;td&gt;&lt;span&gt;Bahnhofstraße 3 &lt;/span&gt;&lt;br/&gt;&lt;span&gt;Berlin &lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Date of birth&lt;/td&gt;&lt;td&gt;&lt;span&gt;10 January 1949&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+                </div>
+            </text>
+            <name>
+                <use>official</use>
+                <family>Müller</family>
+                <given>Heidi</given>
+            </name>
+            <gender>female</gender>
+            <birthDate>1949-01-10</birthDate>
+            <address>
+                <use>home</use>
+                <line>Bahnhofstraße 3</line>
+                <city>Berlin</city>
+                <postalCode>10317</postalCode>
+            </address>
+            <generalPractitioner>
+                <reference>Practitioner/13557</reference>
+            </generalPractitioner>
+            <managingOrganization>
+                <reference>Organization/13556</reference>
+            </managingOrganization>
+        </resource>
+    </entry>
+    <entry>
+        <fullUrl></fullUrl>
+        <resource>
+            <resourceType>MedicationStatement</resourceType>
+            <id>13623</id>
+            <meta>
+                <versionId>3</versionId>
+                <lastUpdated>2023-01-03T03:27:59.214+00:00</lastUpdated>
+                <source>#114a132e7c6f0afa</source>
+            </meta>
+            <extension>
+                <url/>
+                <valueString>1</valueString>
+            </extension>
+            <extension>
+                <url/>
+                <valueDecimal>1</valueDecimal>
+            </extension>
+            <extension>
+                <url/>
+                <valueDecimal>0</valueDecimal>
+            </extension>
+            <identifier>
+                <value>6320332</value>
+            </identifier>
+            <medicationCodeableConcept>
+                <text>MIRTAZAPIN-1A Pharma 15 mg Schmelztabletten</text>
+            </medicationCodeableConcept>
+            <subject>
+                <reference>Patient/13513</reference>
+            </subject>
+            <informationSource>
+                <reference>Practitioner/2102</reference>
+            </informationSource>
+            <derivedFrom>
+                <reference>Organization/13556</reference>
+            </derivedFrom>
+            <dosage>
+                <text>0-1/2-0-1/2</text>
+            </dosage>
+        </resource>
+    </entry>
+    <entry>
+        <fullUrl></fullUrl>
+        <resource>
+            <resourceType>Organization</resourceType>
+            <id>13556</id>
+            <meta>
+                <versionId>2</versionId>
+                <lastUpdated>2022-11-15T02:15:55.548+00:00</lastUpdated>
+                <source>#7be19b07806a528e</source>
+            </meta>
+            <name>Diamant Apotheke</name>
+            <telecom>
+                <value>3216549870</value>
+            </telecom>
+            <telecom>
+                <value>diamant.apotheke@testing.de</value>
+            </telecom>
+            <address>
+                <line>Mozartstraße 4</line>
+                <city>Berlin</city>
+                <postalCode>10178</postalCode>
+            </address>
+        </resource>
+    </entry>
+</root>

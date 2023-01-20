@@ -1,0 +1,204 @@
+{
+  "resourceType": "Bundle",
+  "id": "",
+  "meta": {
+    "lastUpdated": "",
+    "profile": [
+      "https://fhir.kbv.de/StructureDefinition/KBV_PR_ERP_Bundle|1.0.2"
+    ]
+  },
+  "identifier": {
+    "system": "https://gematik.de/fhir/NamingSystem/PrescriptionID",
+    "value": ""
+  },
+  "type": "document",
+  "timestamp": "2023-01-19T12:03:20.90Z",
+  "entry": [
+    {
+      "fullUrl": "",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "2102",
+        "meta": {
+          "versionId": "7",
+          "lastUpdated": "2023-01-09T14:13:29.195+00:00",
+          "source": "#8c12031bb4056f78"
+        },
+        "extension": [
+          {
+            "url": null,
+            "valueString": "fax"
+          },
+          {
+            "url": null,
+            "valueString": "qZDmwQyz73nhdbD9c8qvfxtbCtwXfYRQeNECYEY73k2hjcABSfXf8YV9EK7BQgNAiUWPvV2vE64g2MirVaZ9YNhweairitqZ9DSFRfU4mbXKDjLVgbnKwnmD"
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR",
+            "value": "123456789"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Zimmermann",
+            "given": [
+              "Claudia"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "beatriz.correia@incentergy.de"
+          },
+          {
+            "system": "phone",
+            "value": "888888888"
+          },
+          {
+            "system": "fax",
+            "value": "999999999"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "Gartenstraße 9"
+            ],
+            "city": "Berlin",
+            "postalCode": "10178"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "13513",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2022-11-15T02:23:42.842+00:00",
+          "source": "#1c418e3f70ee7ff2"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Heidi <b>MÜLLER </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Address</td><td><span>Bahnhofstraße 3 </span><br/><span>Berlin </span></td></tr><tr><td>Date of birth</td><td><span>10 January 1949</span></td></tr></tbody></table></div>"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Müller",
+            "given": [
+              "Heidi"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1949-01-10",
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "Bahnhofstraße 3"
+            ],
+            "city": "Berlin",
+            "postalCode": "10317"
+          }
+        ],
+        "generalPractitioner": [
+          {
+            "reference": "Practitioner/13557"
+          }
+        ],
+        "managingOrganization": {
+          "reference": "Organization/13556"
+        }
+      }
+    },
+    {
+      "fullUrl": "",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "13623",
+        "meta": {
+          "versionId": "3",
+          "lastUpdated": "2023-01-03T03:27:59.214+00:00",
+          "source": "#114a132e7c6f0afa"
+        },
+        "extension": [
+          {
+            "url": null,
+            "valueString": "1"
+          },
+          {
+            "url": null,
+            "valueDecimal": 1
+          },
+          {
+            "url": null,
+            "valueDecimal": 0
+          }
+        ],
+        "identifier": [
+          {
+            "value": "6320332"
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "MIRTAZAPIN-1A Pharma 15 mg Schmelztabletten"
+        },
+        "subject": {
+          "reference": "Patient/13513"
+        },
+        "informationSource": {
+          "reference": "Practitioner/2102"
+        },
+        "derivedFrom": [
+          {
+            "reference": "Organization/13556"
+          }
+        ],
+        "dosage": [
+          {
+            "text": "0-1/2-0-1/2"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "13556",
+        "meta": {
+          "versionId": "2",
+          "lastUpdated": "2022-11-15T02:15:55.548+00:00",
+          "source": "#7be19b07806a528e"
+        },
+        "name": "Diamant Apotheke",
+        "telecom": [
+          {
+            "value": "3216549870"
+          },
+          {
+            "value": "diamant.apotheke@testing.de"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Mozartstraße 4"
+            ],
+            "city": "Berlin",
+            "postalCode": "10178"
+          }
+        ]
+      }
+    }
+  ]
+}
