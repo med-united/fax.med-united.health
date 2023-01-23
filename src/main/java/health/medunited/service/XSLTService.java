@@ -9,11 +9,12 @@ import java.util.logging.Logger;
 
 import org.apache.fop.apps.*;
 
+@ApplicationScoped
 public class XSLTService {
 
     private static final Logger log = Logger.getLogger(XSLTService.class.getName());
 
-    static void generatePDF(File xmlFile, File xslFile) throws IOException, FOPException {
+    void generatePDF(File xmlFile, File xslFile) throws IOException, FOPException {
 
         File pdfFile = new File("src/main/resources/xslt", "generated.pdf");
         log.info(pdfFile.getAbsolutePath());

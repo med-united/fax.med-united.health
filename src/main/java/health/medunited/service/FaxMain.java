@@ -1,9 +1,12 @@
 package health.medunited.service;
 
+import io.quarkus.runtime.QuarkusApplication;
+import io.quarkus.runtime.annotations.QuarkusMain;
 import org.apache.fop.apps.FOPException;
 import org.json.JSONObject;
 import org.json.XML;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -14,12 +17,17 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class FaxService {
-    private static final Logger log = Logger.getLogger(FaxService.class.getName());
+@QuarkusMain
+public class FaxMain implements QuarkusApplication {
+
+    private static final Logger log = Logger.getLogger(FaxMain.class.getName());
+
+    @Inject
+    XSLTService xsltService;
 
     private static File getFileFromResource(String fileName) throws URISyntaxException {
 
-        ClassLoader classLoader = FaxService.class.getClassLoader();
+        ClassLoader classLoader = FaxMain.class.getClassLoader();
         URL resource = classLoader.getResource(fileName);
         if (resource == null) {
             throw new IllegalArgumentException("file not found! " + fileName);
@@ -30,7 +38,7 @@ public class FaxService {
         }
     }
 
-    private static void printFile(File file) {
+    private void printFile(File file) {
 
         List<String> lines;
         try {
@@ -41,21 +49,24 @@ public class FaxService {
         }
     }
 
-    public static void main(String[] args) throws URISyntaxException, FOPException, IOException {
+    @Override
+    public int run(String[] args) throws FOPException, IOException, URISyntaxException {
+
+        log.info("Running main method ------------");
 
         String xmlFileName = "xslt/example.xml";
         log.info("getResource : " + xmlFileName);
-        File xmlFile = FaxService.getFileFromResource(xmlFileName);
+        File xmlFile = FaxMain.getFileFromResource(xmlFileName);
         //printFile(xmlFile);
 
         String xslFileName = "xslt/example.xsl";
         log.info("getResource : " + xslFileName);
-        File xslFile = FaxService.getFileFromResource(xslFileName);
+        File xslFile = FaxMain.getFileFromResource(xslFileName);
         //printFile(xslFile);
 
         String jsonFileName = "xslt/exampleBundle.json";
         log.info("getResource : " + jsonFileName);
-        File jsonFile = FaxService.getFileFromResource(jsonFileName);
+        File jsonFile = FaxMain.getFileFromResource(jsonFileName);
         //printFile(jsonFile);
         String jsonBundle = Files.readString(Path.of(jsonFile.getPath()));
 
@@ -63,6 +74,7 @@ public class FaxService {
         String xml = XML.toString(json);
         //log.info(xml);
 
-        XSLTService.generatePDF(xmlFile, xslFile);
+        xsltService.generatePDF(xmlFile, xslFile);
+        return 0;
     }
 }
