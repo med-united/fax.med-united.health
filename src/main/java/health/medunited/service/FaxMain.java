@@ -1,5 +1,7 @@
 package health.medunited.service;
 
+import health.medunited.artemis.PrescriptionConsumer;
+import health.medunited.model.PrescriptionRequest;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import org.apache.fop.apps.FOPException;
@@ -7,6 +9,7 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -24,6 +27,9 @@ public class FaxMain implements QuarkusApplication {
 
     @Inject
     XSLTService xsltService;
+
+    @Inject
+    PrescriptionConsumer prescriptionConsumerProvider;
 
     private static File getFileFromResource(String fileName) throws URISyntaxException {
 
@@ -53,6 +59,9 @@ public class FaxMain implements QuarkusApplication {
     public int run(String[] args) throws FOPException, IOException, URISyntaxException {
 
         log.info("Running main method ------------");
+
+        Void consumer = prescriptionConsumerProvider.call();
+        log.info("PrescriptionConsumer");
 
         String xmlFileName = "xslt/example.xml";
         log.info("getResource : " + xmlFileName);
