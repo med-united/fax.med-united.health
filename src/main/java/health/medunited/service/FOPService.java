@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 import org.apache.fop.apps.*;
 
 @ApplicationScoped
-public class XSLTService {
+public class FOPService {
 
-    private static final Logger log = Logger.getLogger(XSLTService.class.getName());
+    private static final Logger log = Logger.getLogger(FOPService.class.getName());
 
     public void generatePDF(File xslFile, String xmlBundle) throws IOException, FOPException {
 

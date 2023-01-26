@@ -1,7 +1,7 @@
 package health.medunited.artemis;
 
 import health.medunited.model.PrescriptionRequest;
-import health.medunited.service.XSLTService;
+import health.medunited.service.FOPService;
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -22,7 +22,7 @@ public class PrescriptionConsumer implements Callable<Void> {
     ConnectionFactory connectionFactory;
 
     @Inject
-    XSLTService xsltService;
+    FOPService fopService;
 
     private File xslFile;
 
@@ -58,7 +58,7 @@ public class PrescriptionConsumer implements Callable<Void> {
                             String xmlStringWithBundle = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +
                                     "<root>" + xmlBundle + "</root>";
 
-                            xsltService.generatePDF(xslFile, xmlStringWithBundle);
+                            fopService.generatePDF(xslFile, xmlStringWithBundle);
 
                             log.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
                         } else {
