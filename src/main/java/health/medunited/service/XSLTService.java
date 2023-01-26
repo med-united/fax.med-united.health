@@ -14,7 +14,7 @@ public class XSLTService {
 
     private static final Logger log = Logger.getLogger(XSLTService.class.getName());
 
-    void generatePDF(File xmlFile, File xslFile) throws IOException, FOPException {
+    public void generatePDF(File xslFile, String xmlBundle) throws IOException, FOPException {
 
         File pdfFile = new File("src/main/resources/xslt", "generated.pdf");
         log.info(pdfFile.getAbsolutePath());
@@ -31,7 +31,7 @@ public class XSLTService {
             TransformerFactory factory = TransformerFactory.newInstance();
             Transformer transformer = factory.newTransformer(new StreamSource(xslFile));
 
-            Source src = new StreamSource(xmlFile);
+            Source src = new StreamSource(new StringReader(xmlBundle));
             Result res = new SAXResult(fop.getDefaultHandler());
             transformer.transform(src, res);
 

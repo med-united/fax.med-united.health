@@ -1,10 +1,14 @@
 package health.medunited.artemis;
 
 import health.medunited.model.PrescriptionRequest;
+import health.medunited.service.XSLTService;
+import org.json.JSONObject;
+import org.json.XML;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.jms.*;
+import java.io.File;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,10 +21,19 @@ public class PrescriptionConsumer implements Callable<Void> {
     @Inject
     ConnectionFactory connectionFactory;
 
+    @Inject
+    XSLTService xsltService;
+
+    private File xslFile;
+
     private static final String PVS_HEADER = "practiceManagementTranslation";
     private static final String FINGERPRINT_HEADER = "receiverPublicKeyFingerprint";
 
+    public void setTemplateFileForPDFGeneration(File xslFile) {
+        this.xslFile = xslFile;
+    }
 
+    @Override
     public Void call() {
 
         log.info("inside consumer");
@@ -38,8 +51,14 @@ public class PrescriptionConsumer implements Callable<Void> {
                             String practiceManagement = message.getObjectProperty(PVS_HEADER).toString();
                             String fhirBundle = getFhirBundleFromBytesMessage((BytesMessage) message);
                             log.info(practiceManagement);
-                            log.info(fhirBundle);
+                            JSONObject json = new JSONObject(fhirBundle);
+                            String xmlBundle = XML.toString(json);
                             PrescriptionRequest prescription = new PrescriptionRequest(practiceManagement, fhirBundle);
+
+                            String xmlStringWithBundle = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +
+                                    "<root>" + xmlBundle + "</root>";
+
+                            xsltService.generatePDF(xslFile, xmlStringWithBundle);
 
                             log.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
                         } else {
