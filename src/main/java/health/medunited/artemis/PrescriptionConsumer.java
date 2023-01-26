@@ -40,7 +40,7 @@ public class PrescriptionConsumer implements Callable<Void> {
         try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
             Queue queue = context.createQueue("Prescriptions");
             log.info("inside try block");
-            try (JMSConsumer consumer = context.createConsumer(queue)) {
+            try (JMSConsumer consumer = context.createConsumer(queue, "practiceManagementTranslation = 'fax'")) {
                 while (true) {
                     try {
                         Message message = consumer.receive();
