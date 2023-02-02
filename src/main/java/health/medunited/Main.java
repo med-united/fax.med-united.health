@@ -1,9 +1,9 @@
-package health.medunited.service;
+package health.medunited;
 
 import health.medunited.artemis.PrescriptionConsumer;
+import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
-import org.apache.fop.apps.FOPException;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -16,16 +16,40 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @QuarkusMain
-public class FaxMain implements QuarkusApplication {
+public class Main {
 
-    private static final Logger log = Logger.getLogger(FaxMain.class.getName());
+    private static final Logger log = Logger.getLogger(Main.class.getName());
 
-    @Inject
-    PrescriptionConsumer prescriptionConsumerProvider;
+    public static void main(String[] args) {
+
+        Quarkus.run(Fax.class, args);
+    }
+
+    public static class Fax implements QuarkusApplication {
+
+        @Inject
+        PrescriptionConsumer prescriptionConsumerProvider;
+
+        @Override
+        public int run(String... args) throws Exception {
+
+            log.info("Inside run() method ------------");
+            String xslFileName = "xslt/example.xsl";
+            log.info("getResource : " + xslFileName);
+            File xslFile = Main.getFileFromResource(xslFileName);
+            //printFile(xslFile);
+
+            prescriptionConsumerProvider.setTemplateFileForPDFGeneration(xslFile);
+            prescriptionConsumerProvider.call();
+
+            Quarkus.waitForExit();
+            return 0;
+        }
+    }
 
     private static File getFileFromResource(String fileName) throws URISyntaxException {
 
-        ClassLoader classLoader = FaxMain.class.getClassLoader();
+        ClassLoader classLoader = Main.class.getClassLoader();
         URL resource = classLoader.getResource(fileName);
         if (resource == null) {
             throw new IllegalArgumentException("file not found! " + fileName);
@@ -36,7 +60,7 @@ public class FaxMain implements QuarkusApplication {
         }
     }
 
-    private void printFile(File file) {
+    private static void printFile(File file) {
 
         List<String> lines;
         try {
@@ -45,22 +69,5 @@ public class FaxMain implements QuarkusApplication {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public int run(String[] args) throws FOPException, IOException, URISyntaxException {
-
-        log.info("Running main method ------------");
-
-        String xslFileName = "xslt/example.xsl";
-        log.info("getResource : " + xslFileName);
-        File xslFile = FaxMain.getFileFromResource(xslFileName);
-        //printFile(xslFile);
-
-        prescriptionConsumerProvider.setTemplateFileForPDFGeneration(xslFile);
-        prescriptionConsumerProvider.call();
-        log.info("PrescriptionConsumer");
-
-        return 0;
     }
 }
