@@ -13,6 +13,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @QuarkusMain
@@ -31,32 +32,21 @@ public class Main {
         PrescriptionConsumer prescriptionConsumerProvider;
 
         @Override
-        public int run(String... args) throws Exception {
+        public int run(String... args) {
 
             log.info("Inside run() method ------------");
-            String xslFileName = "xslt/example.xsl";
+
+            String xslFileName = "template.xsl";
             log.info("getResource : " + xslFileName);
-            File xslFile = Main.getFileFromResource(xslFileName);
-            //printFile(xslFile);
+            ClassLoader classLoader = getClass().getClassLoader();
+            File xslFile = new File(Objects.requireNonNull(classLoader.getResource(xslFileName)).getFile());
+            printFile(xslFile);
 
             prescriptionConsumerProvider.setTemplateFileForPDFGeneration(xslFile);
             prescriptionConsumerProvider.call();
 
             Quarkus.waitForExit();
             return 0;
-        }
-    }
-
-    private static File getFileFromResource(String fileName) throws URISyntaxException {
-
-        ClassLoader classLoader = Main.class.getClassLoader();
-        URL resource = classLoader.getResource(fileName);
-        if (resource == null) {
-            throw new IllegalArgumentException("file not found! " + fileName);
-        } else {
-            // failed if files have whitespaces or special characters
-            //return new File(resource.getFile());
-            return new File(resource.toURI());
         }
     }
 

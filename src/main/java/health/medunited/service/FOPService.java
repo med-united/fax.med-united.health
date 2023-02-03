@@ -16,7 +16,7 @@ public class FOPService {
 
     public void generatePDF(File xslFile, String xmlBundle) throws IOException, FOPException {
 
-        File pdfFile = new File("src/main/resources/xslt", "generated.pdf");
+        File pdfFile = new File("src/main/resources", "generated.pdf");
         log.info(pdfFile.getAbsolutePath());
 
         FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());

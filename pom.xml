@@ -16,7 +16,9 @@
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
 
+    <!--    Added-->
     <quarkus.package.type>uber-jar</quarkus.package.type>
+
   </properties>
   <dependencyManagement>
     <dependencies>
