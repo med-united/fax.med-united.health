@@ -1,0 +1,51 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: fax
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        uses: docker/build-action@v2
+        with:
+          context: .
+          tags: "$IMAGE_NAME:${{ env.GITHUB_SHA }}"
+        
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      
+      - name: Push Docker image to Amazon ECR
+        uses: docker/push-action@v2
+        with:
+          tags: "${{ steps.login-ecr.outputs.registry }}/$IMAGE_NAME:${{ env.GITHUB_SHA }}"
+      
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Set up kubectl
+        uses: Pablommr/kubernetes-eks@v1.0.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: eu-central-1
+          cluster-name: ${{ secrets.KUBERNETES_CLUSTER_NAME }}
+
+      - name: Apply deployment to Kubernetes cluster
+        run: kubectl apply -f deployment.yaml
+          
+      
