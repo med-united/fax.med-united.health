@@ -14,12 +14,13 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Build Docker image
         uses: docker/build-action@v2
         with:
           context: .
+          push: true
           tags: "$IMAGE_NAME:${{ env.GITHUB_SHA }}"
         
       - name: Login to Amazon ECR
