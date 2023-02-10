@@ -39,7 +39,7 @@ public class Main {
             String xslFileName = "template.xsl";
             log.info("getResource : " + xslFileName);
             ClassLoader classLoader = getClass().getClassLoader();
-            File xslFile = new File(Objects.requireNonNull(classLoader.getResource(xslFileName)).getFile());
+            File xslFile = new File("src/main/resources/template.xsl");
             printFile(xslFile);
 
             prescriptionConsumerProvider.setTemplateFileForPDFGeneration(xslFile);

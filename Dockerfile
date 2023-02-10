@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y openjdk-8-jdk maven
 # Copy the Quarkus app code from the Github repository to the image
 COPY . /fax.med-united.health
 
+# Copy the resources folder to the container so that resources are accessible
+COPY src/main/resources src/main/resources
+
 # Change the working directory to the root of the Quarkus app
 WORKDIR /fax.med-united.health
 
